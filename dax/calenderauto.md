@@ -1,6 +1,6 @@
 # Create Date Table with calenderauto
 
-##Create a simple table dimension
+## Create a simple table dimension
 
 ```
 Date =
@@ -10,11 +10,10 @@ ADDCOLUMNS(mycalander,
     "Year", YEAR([Date]), 
     "Month", MONTH([Date]), 
     "Day", DAY([date])
-    "WeekDay", Day
     )
 ```
 
-##Full Table with fiscal year
+## Full Table with fiscal year
 
 ```
 Date = ADDCOLUMNS(
