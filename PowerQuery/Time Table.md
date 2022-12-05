@@ -1,5 +1,7 @@
 # Time Table
 
+
+```
 let
     Source = {0..1439},
     #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
@@ -100,5 +102,4 @@ let
 in
     #"Changed Type720min"
 
-
-```
+``
