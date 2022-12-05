@@ -1,5 +1,6 @@
 # Time Table
 
+This table shows 24h in different Timeslots.
 
 ```
 let
@@ -94,12 +95,18 @@ let
     #"Added Custom360min" = Table.AddColumn(#"Renamed Columns360min", "6h time slot", each [6h bucket] * 360 / 1440),
     #"Changed Type360min" = Table.TransformColumnTypes(#"Added Custom360min",{{"6h time slot", type time}}),
 
-     // Create 12h / 720 min time slot
-    #"Inserted Integer-Division720min" = Table.AddColumn(#"Changed Type360min", "Integer-Division", each Number.IntegerDivide([Minute Number], 720), Int64.Type),
+    // Create 8h / 480 min time slot
+    #"Inserted Integer-Division480min" = Table.AddColumn(#"Changed Type360min", "Integer-Division", each Number.IntegerDivide([Minute Number], 480), Int64.Type),
+    #"Renamed Columns480min" = Table.RenameColumns(#"Inserted Integer-Division480min",{{"Integer-Division", "8h bucket"}}),
+    #"Added Custom480min" = Table.AddColumn(#"Renamed Columns480min", "8h time slot", each [8h bucket] * 480 / 1440),
+    #"Changed Type480min" = Table.TransformColumnTypes(#"Added Custom480min",{{"8h time slot", type time}}),
+
+    // Create 12h / 720 min time slot
+    #"Inserted Integer-Division720min" = Table.AddColumn(#"Changed Type480min", "Integer-Division", each Number.IntegerDivide([Minute Number], 720), Int64.Type),
     #"Renamed Columns720min" = Table.RenameColumns(#"Inserted Integer-Division720min",{{"Integer-Division", "12h bucket"}}),
     #"Added Custom720min" = Table.AddColumn(#"Renamed Columns720min", "12h time slot", each [12h bucket] * 720 / 1440),
     #"Changed Type720min" = Table.TransformColumnTypes(#"Added Custom720min",{{"12h time slot", type time}})
 in
     #"Changed Type720min"
 
-``
+```
